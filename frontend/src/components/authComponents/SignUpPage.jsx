@@ -1,6 +1,10 @@
+import Navbar from "../Navbar";
+import SignUpForm from "./SignUpForm";
+
 export default function SignUpPage() {
-    return (
-        // TODO MAKE SIGN UP PAGE
-        <h1 className="text-white text-3xl">Sign Up Page</h1>
-    )
+  return (
+    <>
+      <SignUpForm></SignUpForm>
+    </>
+  );
 }

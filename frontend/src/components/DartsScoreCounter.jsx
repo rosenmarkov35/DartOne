@@ -156,20 +156,20 @@ export default function DartsScoreCounter() {
   return (
     <>
       <div
-        className="flex flex-col justify-normal items-center bg-zinc-200 w-5/12 rounded-2xl mt-10 p-5"
+        className="flex flex-col justify-normal items-center bg-offwhite dark:bg-dark-gray w-5/12 rounded-2xl mt-10 p-5"
         style={{ height: "80vh" }}
       >
-        <h1 className="text-zinc-800 text-center m-2 text-3xl font-bold">
+        <h1 className="text-dark-gray dark:text-offwhite text-center m-2 text-3xl font-bold">
           Quickplay
         </h1>
         <div className="flex justify-evenly items-center text-center">
-          <h3 className="text-zinc-800 min-w-36 text-3xl font-bold mr-6">
+          <h3 className="text-dark-gray dark:text-offwhite min-w-36 text-3xl font-bold mr-6">
             Dart {gameData.turn} Leg {gameData.totalLegs + 1}
           </h3>
-          <h2 className="text-zinc-800 text-center m-2 text-5xl font-extrabold">
+          <h2 className="text-dark-gray dark:text-offwhite text-center m-2 text-5xl font-extrabold">
             {gameData.score}
           </h2>
-          <h3 className="text-zinc-800 min-w-36 text-3xl font-bold ml-12">
+          <h3 className="text-dark-gray dark:text-offwhite min-w-36 text-3xl font-bold ml-12">
             Throws {gameData.totalTurns}
           </h3>
         </div>
@@ -200,7 +200,7 @@ export default function DartsScoreCounter() {
             <div
               onMouseEnter={() => setHoveredSections(section.name)}
               onMouseLeave={() => setHoveredSections(null)}
-              className={`w-48 outline outline-2 z-10 outline-zinc-300 bg-zinc-200 relative text-center text-xl text-zinc-800 rounded-md flex justify-center shadow-lg
+              className={`w-48 z-10 dark:bg-offwhite bg-dark-gray text-offwhite dark:text-dark-gray relative text-center text-xl  rounded-md flex justify-center shadow-lg
                `}
             >
               <div
@@ -210,7 +210,7 @@ export default function DartsScoreCounter() {
               </div>
 
               <div
-                className={`transition-all absolute top-full -z-10 left-3.5 rounded-b-md bg-zinc-800 ${
+                className={`transition-all absolute top-full -z-10 left-3.5 rounded-b-md  ${
                   hoveredSections === section.name
                     ? "h-auto opacity-100"
                     : "h-0 opacity-0"
@@ -218,7 +218,7 @@ export default function DartsScoreCounter() {
               >
                 {section.points.map((point) => (
                   <button
-                    className="w-8 h-8 text-zinc-200 bg-zinc-800 hover:text-violet-500"
+                    className="w-8 h-8 dark:text-dark-gray text-offwhite bg-dark-gray dark:bg-zinc-300 hover:text-violet-500"
                     key={point}
                     onClick={() => handleScoreChange(point)}
                   >
@@ -239,7 +239,7 @@ export default function DartsScoreCounter() {
 
           <button
             onClick={() => handleScoreChange(25)}
-            className={`w-20 h-9 bg-zinc-200 mr-8 rounded-md outline outline-2 outline-zinc-300 shadow-md ${
+            className={`w-20 h-9 dark:bg-offwhite bg-dark-gray dark:text-dark-gray text-offwhite mr-8 rounded-md outline outline-2 outline-zinc-300 shadow-md ${
               glowingStates[0] ? "animate-glowRed" : ""
             }`}
           >
@@ -247,7 +247,7 @@ export default function DartsScoreCounter() {
           </button>
           <button
             onClick={() => handleScoreChange(50)}
-            className={`w-20 h-9 bg-zinc-200 rounded-md outline outline-2 outline-zinc-300 shadow-md ${
+            className={`w-20 h-9 dark:bg-offwhite bg-dark-gray dark:text-dark-gray text-offwhite rounded-md outline outline-2 outline-zinc-300 shadow-md ${
               glowingStates[1] ? "animate-glowRed" : ""
             }`}
           >
@@ -261,11 +261,11 @@ export default function DartsScoreCounter() {
           ></FunctionButton>
         </div>
         <div className="w-11/12">
-          <h5 className="flex justify-start items-center text-zinc-800">
+          <h5 className="flex justify-start items-center text-dark-gray dark:text-offwhite">
             Turns:
           </h5>
-          <div className="bg-zinc-800 shadow-2xl shadow-gray-500 p-3 rounded-xl h-12 mt-1">
-            <p className="w-full h-full text-sm text-zinc-200">
+          <div className="dark:bg-offwhite bg-dark-gray  p-3 rounded-xl h-12 mt-1">
+            <p className="w-full h-full text-sm text-offwhite dark:text-dark-gray">
               {gameData.history.map(
                 (turn) =>
                   ` [ ${turn.point * turn.multiplier} ${

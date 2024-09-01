@@ -22,7 +22,7 @@ body {
 }
 
 .bento-element {
-  @apply bg-white dark:bg-zinc-800 cursor-pointer rounded-3xl m-3 transition-all hover:scale-105 text-gray-800 dark:text-gray-300;
+  @apply bg-offwhite dark:bg-dark-gray cursor-pointer rounded-3xl m-3 transition-all hover:scale-105 text-dark-gray dark:text-offwhite;
 }
 .box-small1 {
   grid-area: box-small1;

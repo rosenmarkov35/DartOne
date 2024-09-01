@@ -20,7 +20,11 @@ module.exports = {
         '107': '1.07',
       },
       colors: {
-        'brick-50': 'F8D4C9',
+        'offwhite' : '#E4E4E7',
+        'dark-gray': '#27272A',
+        
+
+        'brick-50': '#F8D4C9',
         'brick-100': '#F6C6B6',
         'brick-200': '#F4B8A4',
         'brick-300': '#F2AA92',

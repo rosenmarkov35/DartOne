@@ -3,11 +3,12 @@ export default function Button({ variant, children, ...props }) {
     <button
       {...props}
       className={`transition-all hover:outline-none text-lg font-semibold
-      hover:shadow-zinc-400 hover:bg-zinc-800 hover:text-zinc-200 
+      hover:bg-dark-gray dark:hover:bg-offwhite hover:shadow-zinc-400  dark:hover:text-dark-gray
+      hover:text-offwhite
         shadow-lg px-8 rounded-md h-3/5 ${
           variant === "active"
-            ? `bg-zinc-800 outline-none shadow-zinc-400 text-violet-400`
-            : `bg-zinc-200 text-zinc-800 shadow-violet-200 outline-violet-300 outline outline-2`
+            ? `bg-dark-gray dark:bg-offwhite outline-none dark:text-violet-600 text-violet-400`
+            : `bg-offwhite dark:bg-dark-gray text-dark-gray dark:text-offwhite outline-1 dark:outline-offwhite outline`
         }`}
     >
       {children}
