@@ -1,48 +1,75 @@
-import { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export default function FeatureDrop({ title, description, demoButton, alert, linkTo }) {
-  const [isHovered, setIsHovered] = useState(false);
+export default function FeatureDrop({
+  title,
+  description,
+  demoButton,
+  alert,
+  linkTo,
+  extHeight = "13rem",
+}) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const contentRef = useRef(null);
+  const [contentHeight, setContentHeight] = useState("0px");
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setContentHeight(isExpanded ? `${contentRef.current.scrollHeight}px` : "0px");
+    }
+  }, [isExpanded]);
 
   return (
-    <>
+    <div className="my-5 feature-drop rounded-2xl w-full dark:bg-dark-gray bg-offwhite text-dark-gray dark:text-gray-300 overflow-hidden">
       <div
-        className={`cursor-pointer my-5 feature-drop h-16 rounded-2xl w-full dark:bg-dark-gray bg-offwhite transition-all text-dark-gray dark:text-gray-300 overflow ${
-          isHovered ? "h-44" : "h-16"
-        }`}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        className="cursor-pointer p-5 flex items-center justify-between"
+        onClick={() => setIsExpanded(!isExpanded)}
       >
-        <div className="h-16 p-5 flex items-center justify-between">
-          <div className="flex justify-center items-center">
-          <h1 className={`text-xl font-bold inline transition-all duration-150 ease-in-out ${isHovered && 'dark:text-purple-400'}`}>{title}</h1>
-          {demoButton && 
-          <Link to={linkTo} className={`px-1 h-5 min-w-11 bg-purple-400 hover:bg-purple-500 transition-colors rounded-md ml-4 text-sm font-semibold text-dark-gray opacity-0 ${
-            isHovered ? "opacity-100" : "opacity-0 max-h-0 pointer-events-none"
-          }`}>{demoButton}</Link>
-          }
-          { alert && <button className={`px-1 h-5 min-w-11 bg-yellow-100 transition-colors rounded-md ml-4 text-sm font-semibold text-dark-gray opacity-0 ${
-            isHovered ? "opacity-100" : "opacity-0 max-h-0 pointer-events-none"
-          }`}>{alert}
-          </button>
-          }
-          </div>
-          <span
-            className={`text-2xl transition-transform duration-200 ease-in-out ${
-              isHovered ? "rotate-90" : "rotate-0"
+        <div className="flex justify-center items-center">
+          <h1
+            className={`text-base lg:text-xl font-bold transition-colors duration-300 ${
+              isExpanded ? "dark:text-purple-400" : ""
             }`}
           >
-            &gt;
-          </span>
+            {title}
+          </h1>
+          {demoButton && (
+            <Link
+              to={linkTo}
+              className={`px-1 h-5 min-w-11 bg-purple-400 hover:bg-purple-500 transition-all duration-300 rounded-md ml-1 md:ml-4 text-sm font-semibold text-dark-gray ${
+                isExpanded ? "opacity-100" : "opacity-0 max-h-0 pointer-events-none"
+              }`}
+            >
+              {demoButton}
+            </Link>
+          )}
+          {alert && (
+            <button
+              className={`px-1 h-5 min-w-11 bg-yellow-100 transition-all duration-300 rounded-md m-3 xl:ml-4 text-sm font-semibold text-dark-gray ${
+                isExpanded ? "opacity-100" : "opacity-0 max-h-0 pointer-events-none"
+              }`}
+            >
+              {alert}
+            </button>
+          )}
         </div>
-        <p
-          className={`px-5 pb-5 text-base text-dark-gray dark:text-purple-200 transition-all duration-150 ease-in-out ${
-            isHovered ? "opacity-100" : "opacity-0 max-h-0 pointer-events-none"
+        <span
+          className={`text-2xl transition-transform duration-300 ${
+            isExpanded ? "rotate-90" : "rotate-0"
           }`}
         >
+          &gt;
+        </span>
+      </div>
+      <div
+        ref={contentRef}
+        className="overflow-hidden transition-[max-height] duration-300 ease-in-out"
+        style={{ maxHeight: contentHeight }}
+      >
+        <p className="px-5 pb-5 sm:text-base text-sm text-dark-gray dark:text-purple-200">
           {description}
         </p>
       </div>
-    </>
+    </div>
   );
 }

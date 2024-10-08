@@ -9,7 +9,7 @@ export default function FeaturesPage() {
       <Navbar></Navbar>
       <main className="flex flex-col justify-center gap-5 items-center">
         <Header title={"Features"}>Experience darts at your best</Header>
-        <div className="w-5/12">
+        <div className="w-10/12 xl:w-5/12">
           <FeatureDrop linkTo={'/quickplay'}
             title={"Real-Time Game Tracking"}
             description={descriptions[0]}
@@ -30,6 +30,7 @@ export default function FeaturesPage() {
             description={descriptions[4]}
             demoButton={null}
             alert={'Coming soon'}
+            extHeight="12rem"
            />
            <FeatureDrop
             title={"Sleek and Fast"}

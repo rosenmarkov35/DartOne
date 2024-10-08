@@ -13,7 +13,7 @@ body {
 /* HOME BENTO */
 
 .bentobox {
-  @apply grid;
+  @apply xl:grid hidden;
   grid-template-areas:
     "rectangle-h rectangle-h box-big box-big rectangle-v"
     "box-small1 box-small2 box-big box-big rectangle-v";
@@ -24,6 +24,11 @@ body {
 .bento-element {
   @apply bg-offwhite dark:bg-dark-gray cursor-pointer rounded-3xl m-3 transition-all hover:scale-105 text-dark-gray dark:text-offwhite;
 }
+
+.bento-element-mobile {
+  @apply bg-offwhite dark:bg-dark-gray rounded-xl py-3 text-dark-gray dark:text-offwhite;
+}
+
 .box-small1 {
   grid-area: box-small1;
 }
@@ -45,7 +50,3 @@ body {
 }
 
 /* ////////////////// */
-
-.feature-drop {
-  box-shadow: 0px 0px 14px 3px rgba(255, 255, 255, 0.2);
-}

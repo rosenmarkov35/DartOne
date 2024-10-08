@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import InputField from "../ui/InputField";
+import Cookies from "js-cookie";
+import Navbar from "../Navbar";
+import { useAuth } from "../../contexts/authContext";
 
 export default function SignUpForm() {
   const [error, setError] = useState("");
@@ -11,6 +14,9 @@ export default function SignUpForm() {
     password: "",
     confirmPassword: "",
   });
+  const { login } = useAuth()
+
+  axios.defaults.headers.common["X-CSRFToken"] = Cookies.get("csrftoken");
 
   const navigate = useNavigate();
 
@@ -41,7 +47,8 @@ export default function SignUpForm() {
 
       console.log("User created successfully", response.data);
       // Redirect to login page or dashboard
-      navigate("/login");
+      login(formData.username, formData.password)
+      navigate("/");
     } catch (err) {
       setError(
         err.response?.data?.message || "An error occurred during sign up"
@@ -51,9 +58,10 @@ export default function SignUpForm() {
 
   return (
     <>
-      <main className="flex flex-col items-center h-screen w-screen">
-        <div className="flex flex-col items-center justify-evenly mt-12 dark:bg-dark-gray bg-offwhite h-3/4 w-1/3 rounded-2xl">
-          <h1 className="dark:text-offwhite text-dark-gray -mt-4 text-4xl font-bold">
+      <Navbar></Navbar>
+      <main className="flex flex-col items-center h-full w-full">
+        <div className="flex flex-col items-center justify-evenly mt-12 dark:bg-dark-gray bg-offwhite h-3/4 xl:w-1/3 w-3/4 sm:w-1/2 rounded-2xl py-8">
+          <h1 className="dark:text-offwhite text-dark-gray my-4 text-4xl font-bold">
             Sign up
           </h1>
           <form
@@ -76,23 +84,26 @@ export default function SignUpForm() {
             ></InputField>
             <InputField
               onChange={handleChange}
-              type={"text"}
+              type={"password"}
               name={"password"}
               value={formData.password}
               placeholder={"Password"}
             ></InputField>
             <InputField
               onChange={handleChange}
-              type={"text"}
-              name={"confirm-password"}
+              type={"password"}
+              name={"confirmPassword"}
               value={formData.confirmPassword}
               placeholder={"Confirm Password"}
             ></InputField>
-            <button className="bg-dark-gray dark:bg-offwhite text-offwhite dark:text-dark-gray hover:text-violet-400 mt-5 transition-all text-xl p-2 px-4 rounded-md">
+            <button
+              type="submit"
+              className="bg-dark-gray dark:bg-offwhite text-offwhite dark:text-dark-gray hover:text-violet-400 mt-5 transition-all text-xl p-2 px-4 rounded-md"
+            >
               Sign up
             </button>
             <Link
-              to={"/account/sign-in"}
+              to={"/account/signin"}
               className="transition-all mt-3 text-violet-500 hover:text-violet-800"
             >
               Already have an account?

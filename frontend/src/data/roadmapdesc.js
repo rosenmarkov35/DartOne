@@ -1,0 +1,7 @@
+const roadmapdesc = [
+  `DartOne’s initial release offers a sleek, minimalistic platform for tracking darts games. 'First Throw' includes key features like Quickplay Mode for instant game tracking, Game History for saving and reviewing past games, and Basic Statistics to track metrics like average throw and total games played. Users can view personalized stats in their profiles, and the intuitive UI ensures smooth navigation. This version sets the foundation for future updates and enhancements.`,
+  `This small quality-of-life update focuses on improving the user experience with several minor but impactful changes. The update includes UI refinements for better navigation, performance optimizations for quicker load times, and bug fixes for a more stable experience. These tweaks ensure smoother gameplay, making DartOne more intuitive and enjoyable to use. Although this update doesn’t introduce major new features, it enhances the overall usability, providing a more polished and seamless experience.`,
+  `This major update introduces social features to DartOne, allowing users to add friends and compare statistics. Players can now connect with friends, view each other’s game histories, and compare key stats like average throws and total games played. This new social layer brings a competitive edge, making the platform more interactive. With a refreshed UI and privacy settings, users can easily manage their profiles and data sharing, creating a more engaging and personalized experience.`
+];
+
+export default roadmapdesc;
