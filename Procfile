@@ -1,1 +1,0 @@
-web: gunicorn dartone_lastone.wsgi

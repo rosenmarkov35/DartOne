@@ -1,11 +1,14 @@
-import Navbar from "../Navbar"
-import SignInForm from "./SignInForm"
+import Navbar from "../Navbar";
+import TransitionWrapper from "../transitionComponents/TransitionWrapper";
+import SignInForm from "./SignInForm";
 
 export default function SignInPage() {
-    return (
-        <>
-        <Navbar></Navbar>
+  return (
+    <>
+      <Navbar></Navbar>
+      <TransitionWrapper>
         <SignInForm></SignInForm>
-        </>
-    )
+      </TransitionWrapper>
+    </>
+  );
 }

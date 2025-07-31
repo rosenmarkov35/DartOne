@@ -22,6 +22,7 @@ module.exports = {
       colors: {
         'offwhite' : '#E4E4E7',
         'dark-gray': '#27272A',
+        'light-gray': '#656567',
         
 
         'brick-50': '#F8D4C9',

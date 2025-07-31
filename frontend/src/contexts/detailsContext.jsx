@@ -13,7 +13,7 @@ export const DetailsProvider = ({ children }) => {
 
   const fetchDetails = async () => {
     try {
-      const response = await axios.get("/api/getdetails/");
+      const response = await axios.get("/api/myaccount/");
       setUserData({
         allGames: response.data.all_games,
         allStats: response.data.all_stats,

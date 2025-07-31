@@ -7,6 +7,8 @@ import axios from "axios";
 import { useAuth } from "../contexts/authContext";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import useCheckDevice from "../hooks/useCheckDevice";
+import AnimatedScore from "./counterComponents/AnimatedScore";
 
 export default function DartsScoreCounter() {
   const INITIAL_GAME_DATA = {
@@ -25,6 +27,8 @@ export default function DartsScoreCounter() {
   const [hoveredSections, setHoveredSections] = useState(null);
   const [saveVisible, setSaveVisible] = useState(false);
   const { isAuthenticated } = useAuth();
+
+  const isMobile = useCheckDevice();
 
   let gameDataToSave = INITIAL_GAME_DATA;
   useEffect(() => {
@@ -199,16 +203,15 @@ export default function DartsScoreCounter() {
     <>
       <div
         className="w-11/12 md:w-7/12 lg:w-5/12 mt-3 rounded-2xl p-5 flex flex-col justify-normal gap-4 items-center dark:bg-dark-gray bg-offwhite"
-        style={{ height: "80vh" }}
+        style={{ height: "85vh" }}
       >
         {saveVisible ? (
           <>
             <h1 className="text-3xl dark:text-offwhite text-dark-gray font-semibold">
               Quickplay
             </h1>
-            <p className="dark:text-offwhite text-dark-gray text-4xl font-semibold">
-              {gameData.score}
-            </p>
+
+            <AnimatedScore score={gameData.score}></AnimatedScore>
 
             <div className="flex justify-evenly items-center w-full gap-x-4">
               <p className="dark:text-offwhite text-dark-gray text-xl font-semibold">
@@ -247,12 +250,12 @@ export default function DartsScoreCounter() {
           </>
         ) : (
           <>
-            <h1 className="text-3xl dark:text-offwhite text-dark-gray font-semibold">
+            <h1 className="text-[28px] dark:text-[#787878] text-dark-gray font-semibold">
               Quickplay
             </h1>
-            <p className="dark:text-offwhite text-dark-gray text-4xl font-semibold">
-              {gameData.score}
-            </p>
+            <hr className="w-4/5 border-zinc-600" />
+
+            <AnimatedScore score={gameData.score}></AnimatedScore>
 
             <div className="flex justify-evenly items-center w-full gap-x-4">
               <p className="dark:text-offwhite text-dark-gray text-xl font-semibold">
@@ -262,6 +265,8 @@ export default function DartsScoreCounter() {
                 Throws {gameData.totalTurns}
               </p>
             </div>
+            <hr className="w-4/5 border-zinc-600" />
+
             <div className="flex justify-evenly items-center w-11/12 h-16 mt-2">
               <Button
                 onClick={() => updateMultiplier(1)}
@@ -293,7 +298,7 @@ export default function DartsScoreCounter() {
                     )
                   }
                   className={`z-10 mb-5 dark:bg-offwhite bg-dark-gray text-offwhite dark:text-dark-gray relative text-center text-xl rounded-md flex justify-center shadow-lg
-               `}
+     `}
                 >
                   <div
                     className={`flex h-10 justify-center items-center cursor-default`}

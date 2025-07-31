@@ -1,4 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.response import Response
@@ -64,16 +66,57 @@ class SaveGameView(APIView):
         return Response({"detail": "Game added successfully"}, status=status.HTTP_201_CREATED)
 
 
-class GetDetailsView(APIView):
+class MyAccountView(APIView):
     def get(self, request, *args, **kwargs):
-        all_games = request.user.user_history.all()
-        all_stats = request.user.user_stats
+        try:
+            user = request.user
 
-        games_serializer = GameHistorySerializer(all_games, many=True)
-        stats_serializer = UserStatsSerializer(all_stats)
+            all_games = user.user_history.all()
+            all_stats = user.user_stats
 
-        return Response({
-            'all_games': games_serializer.data,
-            'all_stats': stats_serializer.data,
-            'username': request.user.username,
-        })
+            games_serializer = GameHistorySerializer(all_games, many=True)
+            stats_serializer = UserStatsSerializer(all_stats)
+
+            return Response({
+                'all_games': games_serializer.data,
+                'all_stats': stats_serializer.data,
+                'username': user.username,
+            }, status=status.HTTP_200_OK)
+
+        except ObjectDoesNotExist as e:
+            return Response(
+                {'error': f'User not found: {str(e)}'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        except Exception as e:
+            return Response(
+                {'error': f'Server error: {str(e)}'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+
+class PlayerAccountView(APIView):
+
+    def get(self, request, username, *args, **kwargs):
+        try:
+            user = User.objects.get(username=username)
+
+            all_games = user.user_history.all()
+            all_stats = user.user_stats
+
+            games_serializer = GameHistorySerializer(all_games, many=True)
+            stats_serializer = UserStatsSerializer(all_stats)
+
+            return Response({
+                'all_games': games_serializer.data,
+                'all_stats': stats_serializer.data,
+                'username': user.username,
+            }, status=status.HTTP_200_OK)
+        except User.DoesNotExist:
+            return Response({
+                'error': 'User not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({
+                'error': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

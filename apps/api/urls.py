@@ -1,6 +1,7 @@
 from django.urls import path
 
-from apps.accounts.views import SignUpView, SignInView, SignOutView, CheckAuthView, SaveGameView, GetDetailsView
+from apps.accounts.views import SignUpView, SignInView, SignOutView, CheckAuthView, SaveGameView, MyAccountView, \
+    PlayerAccountView
 
 urlpatterns = [
     path('signup/', SignUpView.as_view(), name='signup'),
@@ -9,6 +10,7 @@ urlpatterns = [
     path('check-auth/', CheckAuthView.as_view(), name='check-auth'),
 
     path('save-game/', SaveGameView.as_view(), name='save-game'),
-    path('getdetails/', GetDetailsView.as_view(), name='getdetails'),
+    path('myaccount/', MyAccountView.as_view(), name='myaccount'),
+    path('account/<str:username>/', PlayerAccountView.as_view(), name='playeraccount'),
 
 ]
